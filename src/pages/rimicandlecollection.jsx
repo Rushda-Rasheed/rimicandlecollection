@@ -1,6 +1,5 @@
 
 "use client";
-// import { useEffect, useState } from "react";
 import { useEffect, useState, useRef } from "react";
 import Image from "next/image";
 import { FaInstagram, FaWhatsapp } from "react-icons/fa";
@@ -141,6 +140,7 @@ export default function Home() {
           <nav className="space-x-6 hidden md:block text-sm uppercase font-medium">
             <a href="#home" className="hover:text-pink-500">Home</a>
             <a href="#shop" className="hover:text-pink-500">Shop</a>
+            <a href="#cart" className="hover:text-pink-500">🛒MyCart</a>
             <a href="#about" className="hover:text-pink-500">About</a>
             <a href="#contact" className="hover:text-pink-500">Contact</a>
           </nav>
@@ -159,6 +159,7 @@ export default function Home() {
           <div className="md:hidden bg-white border-t text-center py-4 space-y-3">
             <a href="#home" onClick={() => setMenuOpen(false)} className="block text-gray-700 hover:text-pink-500">Home</a>
             <a href="#shop" onClick={() => setMenuOpen(false)} className="block text-gray-700 hover:text-pink-500">Shop</a>
+            <a href="#cart" onClick={() => setMenuOpen(false)} className="block text-gray-700 hover:text-pink-500">🛒MYCart</a>
             <a href="#about" onClick={() => setMenuOpen(false)} className="block text-gray-700 hover:text-pink-500">About</a>
             <a href="#contact" onClick={() => setMenuOpen(false)} className="block text-gray-700 hover:text-pink-500">Contact</a>
           </div>
@@ -174,12 +175,13 @@ export default function Home() {
         <div className="max-w-2xl">
           <h1 className="text-3xl sm:text-5xl font-bold mb-4">Light Up Every Moment</h1>
           <p className="text-base sm:text-lg mb-6">Handmade luxury candles, crafted with love and clean ingredients 🕯️</p>
-          <button
-            onClick={handlePlaceOrder}
-            className="bg-white text-black px-6 py-2 rounded-md hover:bg-gray-200 transition"
-          >
-            Place Order via WhatsApp
-          </button>
+          
+                  <button
+          onClick={() => window.location.href = "#shop"}
+          className="bg-pink-500 text-white px-6 py-2 rounded-full shadow-lg hover:bg-pink-600"
+        >
+          Shop Now
+        </button>
         </div>
       </section>
 
@@ -220,7 +222,7 @@ export default function Home() {
                   </div>
                   <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
                   <p className="text-sm text-gray-500">{product.fragrance} Fragrance</p>
-                  <p className="text-pink-500 font-bold mt-2">₹{product.price}</p>
+                  <p className="text-pink-500 font-bold mt-2">Rs. {product.price}</p>
                   <div className="mt-2">
                     <label htmlFor={`qty-${product.id}`} className="mr-2">Qty:</label>
                     <select
@@ -248,9 +250,9 @@ export default function Home() {
       </section>
 
             {/* Cart Section */}
-            <section className="bg-white py-12">
+            <section  id="cart"className="bg-white py-20">
         <div className="max-w-4xl mx-auto px-4">
-          <h2 className="text-3xl font-bold text-center mb-6">🛒 Your Cart</h2>
+          <h2 className="text-3xl font-bold text-center mb-6">🛒 My Cart</h2>
           {cart.length === 0 ? (
             <p className="text-center text-gray-500">Your cart is empty. Time to treat yourself ✨</p>
           ) : (
@@ -264,7 +266,7 @@ export default function Home() {
                     <div>
                       <h3 className="font-semibold">{item.name}</h3>
                       <p className="text-gray-500">{item.fragrance} Fragrance</p>
-                      <p className="text-pink-500 font-bold">₹{item.price} x {item.quantity} = ₹{item.price * item.quantity}</p>
+                      <p className="text-pink-500 font-bold">Rs. {item.price} x {item.quantity} = Rs. {item.price * item.quantity}</p>
                       
                     </div>
                     <button
@@ -277,7 +279,7 @@ export default function Home() {
                 ))}
               </ul>
               <div className="text-center">
-                <p className="text-xl font-semibold">Total: ₹{getTotal()}</p>
+                <p className="text-xl font-semibold">Total: Rs. {getTotal()}</p>
                 <button
                   onClick={handlePlaceOrder}
                   className="bg-pink-500 hover:bg-pink-600 text-white py-3 px-8 rounded-xl mt-6 transition"
